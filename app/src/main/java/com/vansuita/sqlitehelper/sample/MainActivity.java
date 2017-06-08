@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
                 .table("YOUR_TABLE", "T")
                 .build()
         );
+
+        System.out.println(SqlParser.create("TABLE").pkai("idai").str("textoo").build());
     }
 
 }
