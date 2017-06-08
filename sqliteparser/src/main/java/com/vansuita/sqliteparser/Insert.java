@@ -8,10 +8,10 @@ public class Insert extends SqlParser {
 
     private static final String INSERT_FORMAT = "INSERT INTO %s(%s) VALUES(%s);";
 
-    private String tableName;
+    protected String tableName;
 
-    private LinkedList<String> columns;
-    private LinkedList<String> values;
+    protected LinkedList<String> columns;
+    protected LinkedList<String> values;
 
     Insert(){}
 

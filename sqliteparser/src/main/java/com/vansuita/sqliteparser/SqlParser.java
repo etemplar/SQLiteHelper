@@ -25,6 +25,10 @@ public abstract class SqlParser {
         return new Insert(tableName);
     }
 
+    public static Replace replace(String tableName) {
+        return new Replace(tableName);
+    }
+
     public static Delete delete(String tableName) {
         return new Delete(tableName);
     }

@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
                 .build()
         );
 
+        System.out.println(SqlParser.replace("TABLENAME").col("Col1", "Val1").build());
+
         System.out.println(SqlParser.create("TABLE").pkai("idai").str("textoo").build());
     }
 
