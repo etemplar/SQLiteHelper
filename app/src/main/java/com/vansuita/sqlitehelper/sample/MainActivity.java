@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         System.out.println(SqlParser.replace("TABLENAME").col("Col1", "Val1").build());
 
-        System.out.println(SqlParser.create("TABLE").pkai("idai").str("textoo").build());
+        System.out.println(SqlParser.create("TABLEW").pkai("idai").str("textoo").unique("cname", "textoo", "textop").build());
     }
 
 }

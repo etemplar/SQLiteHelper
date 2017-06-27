@@ -17,6 +17,7 @@ public class Create extends SqlParser {
 
     private LinkedHashMap<String, String> fields;
     private List<String> indexes;
+    private List<String> constraints;
     private String tableName;
 
     public Create(String tableName) {
@@ -31,8 +32,9 @@ public class Create extends SqlParser {
      */
     @Override
     protected Create clear() {
-        fields = new LinkedHashMap();
-        indexes = new ArrayList();
+        fields = new LinkedHashMap<>();
+        indexes = new ArrayList<>();
+        constraints = new ArrayList<>();
         tableName = "";
         return this;
     }
@@ -127,6 +129,18 @@ public class Create extends SqlParser {
         return this;
     }
 
+    /**
+     * Sets a Unique constraint name.
+     *
+     * @param constraintName The name of the constraint
+     * @param columns Constraint columns
+     * @return the same instance of {@link Create} class.
+     */
+    public Create unique(String constraintName, String... columns) {
+        String uni = String.format(CREATE_UNIQUE_CONSTRAINT, constraintName, Utils.breakArray(",", columns));
+        constraints.add(uni);
+        return this;
+    }
 
     /**
      * Iterates over the fields map to build a string with field name and types.
@@ -140,7 +154,14 @@ public class Create extends SqlParser {
 
         while (it.hasNext()) {
             Map.Entry<String, String> field = it.next();
-            result += field.getKey() + " " + field.getValue() + (it.hasNext() ? "," : "");
+            result += field.getKey() + " " + field.getValue() + (it.hasNext() || !constraints.isEmpty()  ? "," : "");
+        }
+
+        Iterator<String> itc = constraints.iterator();
+
+        while (itc.hasNext()) {
+            String constraint = itc.next();
+            result += constraint + (it.hasNext() ? "," : "");
         }
 
         return result;
